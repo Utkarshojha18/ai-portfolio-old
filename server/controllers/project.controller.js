@@ -1,6 +1,5 @@
 import Project from "../models/project.model.js";
 
-// Create Project
 export const createProject = async (req, res) => {
   try {
     const project = await Project.create(req.body);
@@ -11,6 +10,8 @@ export const createProject = async (req, res) => {
       project,
     });
   } catch (error) {
+    console.error("Create project error:", error);
+
     res.status(500).json({
       success: false,
       message: error.message,
@@ -18,7 +19,6 @@ export const createProject = async (req, res) => {
   }
 };
 
-// Get All Projects
 export const getProjects = async (req, res) => {
   try {
     const projects = await Project.find().sort({ createdAt: -1 });
@@ -28,6 +28,8 @@ export const getProjects = async (req, res) => {
       projects,
     });
   } catch (error) {
+    console.error("Get projects error:", error);
+
     res.status(500).json({
       success: false,
       message: error.message,
